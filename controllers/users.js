@@ -1,4 +1,3 @@
-/* eslint linebreak-style: ["error", "windows"] */
 const path = require('path');
 // eslint-disable-next-line import/no-dynamic-require
 const User = require(path.join('..', 'models', 'user'));
