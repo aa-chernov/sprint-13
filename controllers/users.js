@@ -21,13 +21,13 @@ module.exports.getUsers = (req, res) => {
       .send({ message: err.message }));
 };
 
-module.exports.getUserById = (req, res) => {
-  User.findById(req.params._id)
-    .then((user) => res.send({ data: user }))
-    .catch(() => res
-      .status(404)
-      .send({ message: 'Нет пользователя с таким id' }))
-    .finally((err) => res
-      .status(500)
-      .send({ message: err.message }));
+module.exports.getUserById = async (req, res) => {
+  try {
+    const user = await User
+      .findById(req.params._id)
+      .orFail(new Error('Нет пользователя с таким id'));
+    res.json({ user });
+  } catch (err) {
+    res.status(404).send({ message: err.message });
+  }
 };

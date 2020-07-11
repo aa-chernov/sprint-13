@@ -22,11 +22,15 @@ module.exports.createCard = (req, res) => {
       .send({ message: err.message }));
 };
 
-module.exports.deleteCard = (req, res) => {
-  Card.findByIdAndRemove(req.params._id)
-    .then((card) => res
-      .send({ message: `Удалена карточка: ${card._id}` }))
-    .catch((err) => res
-      .status(500)
-      .send({ message: err.message }));
+module.exports.deleteCard = async (req, res) => {
+  try {
+    const card = await Card
+      .findByIdAndRemove(req.params._id)
+      .orFail(new Error('Нет такой карточки'));
+    res.send({ message: `Удалена карточка ${card.name} с id ${card._id}`, card });
+  } catch (err) {
+    res
+      .status(404)
+      .send({ message: err.message });
+  }
 };
