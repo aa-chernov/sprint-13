@@ -1,6 +1,5 @@
 const usersRouter = require('express').Router();
 
-// eslint-disable-next-line import/no-dynamic-require
 const { getUserById, getUsers, createUser } = require('../controllers/users');
 
 usersRouter.route('/users')
