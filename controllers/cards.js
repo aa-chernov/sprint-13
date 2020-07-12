@@ -23,18 +23,16 @@ module.exports.createCard = (req, res) => {
 };
 
 module.exports.deleteCard = async (req, res) => {
-  const card = await Card.findByIdAndRemove(req.params._id);
   try {
-    res.send({ message: `Удалена карточка ${card.name} с id ${card._id}`, card });
-  } catch (err) {
+    const card = await Card.findByIdAndRemove(req.params._id);
     if (card === null) {
-      res
-        .status(404)
-        .send({ message: 'Нет такой карточки!' });
+      res.status(404).send({ message: 'Нет такой карточки' });
     } else {
-      res
-        .status(500)
-        .send({ message: err.message });
+      res.send({ message: `Удалена карточка ${card.name} с id ${card._id}`, card });
     }
+  } catch (err) {
+    res
+      .status(500)
+      .send({ message: err.message });
   }
 };
