@@ -1,6 +1,6 @@
 {
   "name": "sprint-13",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Creating a REST API, exploring noSQL databases in MongoDB and Mongoose",
   "main": "app.js",
   "scripts": {

@@ -12,13 +12,7 @@ const cardSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.String,
     required: true,
     validate: {
-      validator(url) {
-        validator.isURL(url, {
-          require_tld: true,
-          allow_underscores: true,
-          allow_trailing_dot: true,
-        });
-      },
+      validator: (url) => validator.isURL(url),
     },
   },
   owner: {
